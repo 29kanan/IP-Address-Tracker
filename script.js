@@ -59,3 +59,19 @@ searchInp.addEventListener('keypress', (e) => {
         searchIP(ipInput);
     }
 });
+
+async function getUserIP(){
+    try {
+        const ipRes = await fetch(`${BASE_URL}`);
+        const ipData = res.json();
+        const userIP = ipData.ip;
+
+        searchIP(userIP);
+    }catch(error){
+        console.error('Error fetching user IP:', error);
+        searchIP('');
+        alert('Something went wrong!');
+    }
+}
+
+window.addEventListener('DOMContentLoaded', getUserIP);
